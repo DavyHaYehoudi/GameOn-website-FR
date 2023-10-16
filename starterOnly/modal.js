@@ -27,15 +27,16 @@ function closeModal() {
 
 // Form submit
 function validate(event) {
-  event.preventDefault();
-  validateFirstName();
-  validateLastName();
-  validateEmail();
-  validateBirthday();
-  validateQuantity()
-  validateLocation();
-  validateAcceptedConditions();
-  return true;
+  return (
+    (validateFirstName() &&
+      validateLastName() &&
+      validateEmail() &&
+      validateBirthday() &&
+      validateQuantity() &&
+      validateLocation() &&
+      validateAcceptedConditions()) ||
+    event.preventDefault()
+  );
 }
 function validateFirstName() {
   const $firstNameInput = document.getElementById("first");
@@ -45,7 +46,7 @@ function validateFirstName() {
 
   if (isValidFirstName) {
     $errorContainer.setAttribute("data-error-visible", "false");
-    return true
+    return true;
   } else {
     $errorContainer.setAttribute("data-error-visible", "true");
     $errorContainer.setAttribute(
@@ -62,6 +63,7 @@ function validateLastName() {
 
   if (isValidName) {
     $errorContainer.setAttribute("data-error-visible", "false");
+    return true;
   } else {
     $errorContainer.setAttribute("data-error-visible", "true");
     $errorContainer.setAttribute(
@@ -80,6 +82,7 @@ function validateEmail() {
   const $errorContainer = document.getElementById("emailField");
   if (controlEmail($email)) {
     $errorContainer.setAttribute("data-error-visible", "false");
+    return true;
   } else {
     $errorContainer.setAttribute("data-error-visible", "true");
     $errorContainer.setAttribute(
@@ -105,6 +108,7 @@ function validateBirthday() {
   }
   if (!controlBirthdate($birthdate)) {
     $errorContainer.setAttribute("data-error-visible", "false");
+    return true;
   } else {
     $errorContainer.setAttribute("data-error-visible", "true");
     $errorContainer.setAttribute(
@@ -148,6 +152,7 @@ function validateQuantity() {
   }
   if (controlQuantity($quantity)) {
     $errorContainer.setAttribute("data-error-visible", "false");
+    return true;
   } else {
     $errorContainer.setAttribute("data-error-visible", "true");
     $errorContainer.setAttribute(
@@ -180,6 +185,7 @@ function validateLocation() {
 
   if (isSelected) {
     $errorContainer.setAttribute("data-error-visible", "false");
+    return true;
   } else {
     $errorContainer.setAttribute("data-error-visible", "true");
     $errorContainer.setAttribute("data-error", "Veuillez choisir un lieu.");
@@ -190,6 +196,7 @@ function validateAcceptedConditions() {
   const $acceptedConditions = document.getElementById("checkbox1").checked;
   if ($acceptedConditions) {
     $errorContainer.setAttribute("data-error-visible", "false");
+    return true;
   } else {
     $errorContainer.setAttribute("data-error-visible", "true");
     $errorContainer.setAttribute(
