@@ -1,24 +1,27 @@
+// Fonction pour modifier la classe du menu de navigation
 function editNav() {
   const x = document.getElementById("myTopnav");
   x.className === "topnav"
     ? (x.className += " responsive")
     : (x.className = "topnav");
 }
-
+// Fonction pour basculer la visibilité de l'erreur
 function toggleErrorVisibility($container, isValid, errorMessage) {
+  // Masquer l'erreur si le champ est valide
   if (isValid) {
     $container.setAttribute("data-error-visible", "false");
   } else {
+    // Afficher l'erreur avec le message approprié
     $container.setAttribute("data-error-visible", "true");
     $container.setAttribute("data-error", errorMessage);
   }
 }
-
+// Validation du prénom
 function validateFirstName() {
   const $firstNameInput = document.getElementById("first");
   const $errorContainer = document.getElementById("firstName");
   const isValidFirstName = $firstNameInput.value.length >= 2;
-
+  // Toggle la visibilité de l'erreur
   toggleErrorVisibility(
     $errorContainer,
     isValidFirstName,
@@ -27,12 +30,12 @@ function validateFirstName() {
 
   return isValidFirstName;
 }
-
+// Validation du nom de famille
 function validateLastName() {
   const $lastNameInput = document.getElementById("last");
   const $errorContainer = document.getElementById("lastName");
   const isValidName = $lastNameInput.value.length >= 2;
-
+  // Toggle la visibilité de l'erreur
   toggleErrorVisibility(
     $errorContainer,
     isValidName,
@@ -41,13 +44,13 @@ function validateLastName() {
 
   return isValidName;
 }
-
+// Validation de l'adresse email
 function validateEmail() {
   const $email = document.getElementById("email").value;
   const $errorContainer = document.getElementById("emailField");
-
+  // Validation de l'adresse email
   const isValidEmail = controlEmail($email);
-
+  // Toggle la visibilité de l'erreur
   toggleErrorVisibility(
     $errorContainer,
     isValidEmail,
@@ -56,12 +59,13 @@ function validateEmail() {
 
   return isValidEmail;
 }
-
+// Validation de la date de naissance
 function validateBirthday() {
   const $errorContainer = document.getElementById("birthday");
   const $birthdate = document.getElementById("birthdate").value;
+  // Validation de la date de naissance
   const isValidBirthdate = controlBirthdate($birthdate);
-
+  // Toggle la visibilité de l'erreur
   toggleErrorVisibility(
     $errorContainer,
     isValidBirthdate,
@@ -70,12 +74,13 @@ function validateBirthday() {
 
   return isValidBirthdate;
 }
-
+// Validation de la quantité
 function validateQuantity() {
   const $errorContainer = document.getElementById("howMuch");
   const $quantity = document.getElementById("quantity").value;
+  // Validation de la quantité
   const isValidQuantity = controlQuantity($quantity);
-
+  // Toggle la visibilité de l'erreur
   toggleErrorVisibility(
     $errorContainer,
     isValidQuantity,
@@ -84,14 +89,15 @@ function validateQuantity() {
 
   return isValidQuantity;
 }
-
+// Validation de la localisation
 function validateLocation() {
   const $errorContainer = document.getElementById("location");
   const locationRadios = document.querySelectorAll(
     '.formData#location input[type="radio"]'
   );
+  // Vérifie si au moins un bouton radio est sélectionné
   const isSelected = Array.from(locationRadios).some((radio) => radio.checked);
-
+  // Toggle la visibilité de l'erreur
   toggleErrorVisibility(
     $errorContainer,
     isSelected,
@@ -100,11 +106,11 @@ function validateLocation() {
 
   return isSelected;
 }
-
+// Validation de l'acceptation des conditions
 function validateAcceptedConditions() {
   const $errorContainer = document.getElementById("acceptedConditions");
   const $acceptedConditions = document.getElementById("checkbox1").checked;
-
+  // Toggle la visibilité de l'erreur
   toggleErrorVisibility(
     $errorContainer,
     $acceptedConditions,
@@ -113,12 +119,12 @@ function validateAcceptedConditions() {
 
   return $acceptedConditions;
 }
-
+// Validation du format de l'adresse email
 function controlEmail(email) {
   const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   return regex.test(email);
 }
-
+// Validation de la date de naissance dans une certaine plage
 function controlBirthdate(dateString) {
   const currentDate = new Date();
   const minDate = new Date(
@@ -141,7 +147,7 @@ function controlBirthdate(dateString) {
 
   return false;
 }
-
+// Validation de la quantité dans une plage spécifique
 function controlQuantity(quantity) {
   const regex = /^(?:\d|[1-9]\d|99)$/;
   return regex.test(quantity);
@@ -169,21 +175,21 @@ function closeModal() {
 
 // Form submit
 function validate(event) {
-  event.preventDefault()
+  event.preventDefault();
   const isFormValid =
-  validateFirstName() &&
-  validateLastName() &&
-  validateEmail() &&
-  validateBirthday() &&
-  validateQuantity() &&
-  validateLocation() &&
-  validateAcceptedConditions();
+    validateFirstName() &&
+    validateLastName() &&
+    validateEmail() &&
+    validateBirthday() &&
+    validateQuantity() &&
+    validateLocation() &&
+    validateAcceptedConditions();
 
-if (isFormValid) {
-  showConfirmation(); 
-}
+  if (isFormValid) {
+    showConfirmation();
+  }
 
-return isFormValid || event.preventDefault();
+  return isFormValid || event.preventDefault();
 }
 function showConfirmation() {
   // Cache le formulaire
@@ -191,6 +197,5 @@ function showConfirmation() {
 
   // Affiche la div de confirmation
   const confirmDiv = document.getElementById("confirm");
-  confirmDiv.classList.add("active","content");
-
+  confirmDiv.classList.add("active", "content");
 }
