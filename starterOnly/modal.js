@@ -90,58 +90,47 @@ function validateEmail() {
       "Veuillez saisir une adresse email valide."
     );
   }
-  // ^ : Le début de la chaîne.
-  // [a-zA-Z0-9._-]+ : Un ou plusieurs caractères alphanumériques, points, underscores ou tirets.
-  // @ : Le symbole "@".
-  // [a-zA-Z0-9.-]+ : Un ou plusieurs caractères alphanumériques, points ou tirets pour le nom de domaine.
-  // \. : Le point (il doit être échappé car dans une regex, le point correspond à n'importe quel caractère).
-  // [a-zA-Z]{2,} : Deux caractères alphabétiques ou plus pour l'extension (par exemple, com, org).
-  // $ : La fin de la chaîne.
 }
 function validateBirthday() {
   const $errorContainer = document.getElementById("birthday");
   const $birthdate = document.getElementById("birthdate").value;
-  function controlBirthdate(date) {
-    const regex =
-      /^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$/;
-    return regex.test(date);
+  console.log("$birthdate:", $birthdate);
+  function controlBirthdate(dateString) {
+    const currentDate = new Date();
+    const minDate = new Date(
+      currentDate.getFullYear() - 100,
+      currentDate.getMonth(),
+      currentDate.getDate()
+    );
+    const maxDate = new Date(
+      currentDate.getFullYear() - 16,
+      currentDate.getMonth(),
+      currentDate.getDate()
+    );
+
+    const regex = /^(19\d\d|20\d\d)-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
+
+    if (regex.test(dateString)) {
+      const birthDate = new Date(dateString);
+
+      if (birthDate >= minDate && birthDate <= maxDate) {
+        return true;
+      }
+    }
+
+    return false;
   }
-  if (!controlBirthdate($birthdate)) {
+  if (controlBirthdate($birthdate)) {
     $errorContainer.setAttribute("data-error-visible", "false");
     return true;
   } else {
     $errorContainer.setAttribute("data-error-visible", "true");
     $errorContainer.setAttribute(
       "data-error",
-      "Veuillez saisir une date d'anniversaire valide."
+      "Veuillez saisir une date d'anniversaire valide entre il y a 100 ans et 16 ans avant aujourd'hui."
     );
+    return false;
   }
-  // En résumé, la regex vérifie que la date est au format "dd/mm/yyyy" et respecte les règles du calendrier.
-  //   ^ : Le début de la chaîne.
-
-  // ( : Ouverture du groupe de conditions.
-
-  // (0[1-9]|[12]\d|3[01]) : Jour, de 01 à 31.
-  // \/ : Le caractère barre oblique pour séparer le jour du mois.
-  // (0[13578]|1[02]) : Mois, avec 31 jours.
-  // \/ : Le caractère barre oblique pour séparer le mois de l'année.
-  // ((19|[2-9]\d)\d{2}) : Année, 4 chiffres, débutant par 19 ou une autre décennie commençant par 2-9.
-  // | : Ou bien...
-  // (0[1-9]|[12]\d|30) : Jour, de 01 à 30.
-  // \/ : Le caractère barre oblique pour séparer le jour du mois.
-  // (0[13456789]|1[012]) : Mois, avec 30 jours.
-  // \/ : Le caractère barre oblique pour séparer le mois de l'année.
-  // ((19|[2-9]\d)\d{2}) : Année, 4 chiffres, débutant par 19 ou une autre décennie commençant par 2-9.
-  // | : Ou bien...
-  // (0[1-9]|1\d|2[0-8]) : Jour, de 01 à 28.
-  // \/ : Le caractère barre oblique pour séparer le jour du mois.
-  // 02 : Mois de février.
-  // \/ : Le caractère barre oblique pour séparer le mois de l'année.
-  // ((19|[2-9]\d)\d{2}) : Année, 4 chiffres, débutant par 19 ou une autre décennie commençant par 2-9.
-  // | : Ou bien...
-  // 29\/02\/ : Le 29 février.
-  // ((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))) : Conditions pour les années bissextiles.
-  // $ : La fin de la chaîne.
 }
 function validateQuantity() {
   const $errorContainer = document.getElementById("howMuch");
@@ -160,14 +149,6 @@ function validateQuantity() {
       "Veuillez saisir un chiffre entre 0 et 99."
     );
   }
-  //   ^ : Le début de la chaîne.
-  // (?: ... ) : Un groupe non capturant.
-  // \d : Correspond à un chiffre de 0 à 9.
-  // | : Ou bien...
-  // [1-9]\d : Un chiffre de 10 à 99 (ne commence pas par zéro).
-  // | : Ou bien...
-  // 99 : La valeur 99.
-  // $ : La fin de la chaîne.
 }
 
 function validateLocation() {
