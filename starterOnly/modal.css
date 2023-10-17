@@ -175,6 +175,7 @@ main {
   margin: 5% auto;
   width: 100%;
   max-width: 500px;
+  min-height: 700px;
   animation-name: modalopen;
   animation-duration: var(--modal-duration);
   background: #232323;
@@ -217,7 +218,6 @@ input {
   display: block;
   margin-top: 7px;
   margin-bottom: 7px;
-  text-align: right;
   line-height: 0.3;
   opacity: 0;
   transition: 0.3s;
@@ -228,19 +228,6 @@ input {
 .formData[data-error-visible="true"] .text-control {
   border: 2px solid #e54858;
 }
-/* 
-input[data-error]::after {
-    content: attr(data-error);
-    font-size: 0.4em;
-    color: red;
-} */
-/* *************************************** */
-.validation-passed::after {
-  content: '\2713'; /* Unicode checkmark character */
-  font-size: 0.8em;
-  color: #4CAF50;
-}
-/* *************************************** */
 
 .checkbox-label,
 .checkbox2-label {
@@ -536,3 +523,35 @@ footer {
     opacity: 1;
   }
 }
+#confirm {
+  display: none;
+}
+
+#confirm.active {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  flex-wrap: wrap;
+}
+
+#confirm span{
+  display: inline-block;
+}
+#confirm h3 {
+  font-size: 2rem;
+}
+
+#confirm button {
+  color: white;
+  background-color: #fe142f;
+  border-radius: 8px;
+  border: none;
+  width: 150px;
+  padding: 10px;
+  margin: 20px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+
+
