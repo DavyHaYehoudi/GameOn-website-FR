@@ -54,12 +54,13 @@
           <span class="close" onclick="closeModal()"></span>
           <div class="modal-body">
             <form
+              id="myForm"
               name="reserve"
               action="index.html"
               method="get"
               onsubmit="return validate(event);"
             >
-              <div id="firstName" class="formData"   data-error-visible="false" >
+              <div id="firstName" class="formData" data-error-visible="false">
                 <label for="first">Prénom</label><br />
                 <input
                   class="text-control"
@@ -69,7 +70,7 @@
                   oninput="validateFirstName()"
                 /><br />
               </div>
-              <div id="lastName" class="formData"  data-error-visible="false" >
+              <div id="lastName" class="formData" data-error-visible="false">
                 <label for="last">Nom</label><br />
                 <input
                   class="text-control"
@@ -79,7 +80,7 @@
                   oninput="validateLastName()"
                 /><br />
               </div>
-              <div id="emailField" class="formData"  data-error-visible="false" >
+              <div id="emailField" class="formData" data-error-visible="false">
                 <label for="email">E-mail</label><br />
                 <input
                   class="text-control"
@@ -89,7 +90,7 @@
                   oninput="validateEmail()"
                 /><br />
               </div>
-              <div id="birthday" class="formData"  data-error-visible="false" >
+              <div id="birthday" class="formData" data-error-visible="false">
                 <label for="birthdate">Date de naissance</label><br />
                 <input
                   class="text-control"
@@ -115,7 +116,7 @@
               <p class="text-label">
                 A quel tournoi souhaitez-vous participer cette année ?
               </p>
-              <div id="location" class="formData"  data-error-visible="false" >
+              <div id="location" class="formData" data-error-visible="false">
                 <input
                   class="checkbox-input"
                   type="radio"
@@ -144,7 +145,6 @@
                   id="location3"
                   name="location"
                   value="Seattle"
-                  
                 />
                 <label class="checkbox-label" for="location3">
                   <span class="checkbox-icon"></span>
@@ -167,7 +167,6 @@
                   id="location5"
                   name="location"
                   value="Boston"
-                  
                 />
                 <label class="checkbox-label" for="location5">
                   <span class="checkbox-icon"></span>
@@ -186,14 +185,18 @@
                 >
               </div>
 
-              <div id="acceptedConditions" class="formData"  data-error-visible="false" >
+              <div
+                id="acceptedConditions"
+                class="formData"
+                data-error-visible="false"
+              >
                 <input
                   class="checkbox-input"
                   type="checkbox"
                   id="checkbox1"
                   checked
                 />
-                <label class="checkbox2-label" for="checkbox1" >
+                <label class="checkbox2-label" for="checkbox1">
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>

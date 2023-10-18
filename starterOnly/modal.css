@@ -92,8 +92,6 @@ img {
   }
 }
 
-
-
  @media screen and (max-width: 540px) {
   .topnav a {display: none;}
   .topnav a.icon {
@@ -523,6 +521,7 @@ footer {
     opacity: 1;
   }
 }
+/* Gestion du formulaire après succès de la soumission */
 #confirm {
   display: none;
 }
@@ -543,6 +542,7 @@ footer {
 }
 
 #confirm button {
+  display: inline-block;
   color: white;
   background-color: #fe142f;
   border-radius: 8px;
@@ -551,7 +551,6 @@ footer {
   padding: 10px;
   margin: 20px;
   cursor: pointer;
-  display: inline-block;
 }
 
 

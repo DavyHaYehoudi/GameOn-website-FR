@@ -5,6 +5,7 @@ function editNav() {
     ? (x.className += " responsive")
     : (x.className = "topnav");
 }
+/* ********************************* START GESTION DES ERREURS ENTREES ********************************* */
 // Fonction pour basculer la visibilité de l'erreur
 function toggleErrorVisibility($container, isValid, errorMessage) {
   // Masquer l'erreur si le champ est valide
@@ -152,25 +153,30 @@ function controlQuantity(quantity) {
   const regex = /^(?:\d|[1-9]\d|99)$/;
   return regex.test(quantity);
 }
+/* ********************************* END GESTION DES ERREURS ENTREES ********************************* */
 
+/* ********************************* START GESTION SOUMISSION FORMULAIRE ********************************* */
 // DOM Elements
-const modalbg = document.querySelector(".bground");
-const modalbd = document.querySelector(".modal-body");
-const modalContent = document.querySelector(".content");
-const modalBtn = document.querySelectorAll(".modal-btn");
-const formData = document.querySelectorAll(".formData");
+const $modalbg = document.querySelector(".bground");
+const $modalContent = document.querySelector(".content");
+const $modalBtn = document.querySelectorAll(".modal-btn");
+const $form = document.getElementById("myForm");
+const $confirmDiv = document.getElementById("confirm");
 
 // launch modal event
-modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+$modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 
 // launch modal form
 function launchModal() {
-  modalbg.style.display = "block";
+  $modalbg.style.display = "block";
 }
 
 // Close modal form
 function closeModal() {
-  modalbg.style.display = "none";
+  $modalbg.style.display = "none";
+  $modalContent.style.display = "block";
+  $confirmDiv.classList.remove("active");
+  resetForm();
 }
 
 // Form submit
@@ -187,15 +193,22 @@ function validate(event) {
 
   if (isFormValid) {
     showConfirmation();
+    resetForm(); // Réinitialise le formulaire après la confirmation
   }
-
-  return isFormValid || event.preventDefault();
 }
+
+// Fonction pour réinitialiser le formulaire
+function resetForm() {
+  $form.reset();
+}
+
+// Fonction pour afficher la confirmation
 function showConfirmation() {
   // Cache le formulaire
-  modalContent.style.display = "none";
-
+  $modalContent.style.display = "none";
   // Affiche la div de confirmation
-  const confirmDiv = document.getElementById("confirm");
-  confirmDiv.classList.add("active", "content");
+  $confirmDiv.classList.add("active", "content");
+  // Réinitialise le formulaire après la confirmation
+  resetForm();
 }
+/* ********************************* END GESTION SOUMISSION FORMULAIRE ********************************* */
