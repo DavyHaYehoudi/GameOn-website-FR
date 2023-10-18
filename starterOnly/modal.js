@@ -193,7 +193,6 @@ function validate(event) {
 
   if (isFormValid) {
     showConfirmation();
-    resetForm(); // Réinitialise le formulaire après la confirmation
   }
 }
 
